@@ -11,12 +11,15 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Constants_GoL.hpp"
+
+using namespace Constants_GoL;
 
 class Cell {
 
 public:
     Cell();
-    Cell(int xPosition, int yPosition, bool isLiving);
+    Cell(int rowIndex, int colIndex, bool isLiving);
     bool getIsAlive() { return isAlive; };
     void setIsAlive(bool isLiving);
     
@@ -24,8 +27,8 @@ public:
     sf::RectangleShape& getCellShape() { return cellShape; };
     
 private:
-    int cellWidth;
-    int cellHeight;
+    //int cellWidth;
+    //int cellHeight;
     bool isAlive;
     sf::RectangleShape cellShape;
     

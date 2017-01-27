@@ -10,6 +10,7 @@
 		96AEB21C1E273CD500365C79 /* main copy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96AEB21B1E273CD500365C79 /* main copy.cpp */; };
 		96AEB21F1E273E8400365C79 /* black_800x600.png in Resources */ = {isa = PBXBuildFile; fileRef = 96AEB21D1E273E8400365C79 /* black_800x600.png */; };
 		96AEB2201E273E8400365C79 /* white_800x600.png in Resources */ = {isa = PBXBuildFile; fileRef = 96AEB21E1E273E8400365C79 /* white_800x600.png */; };
+		96B480701E3ACDAC0062B88D /* white_1600x1200.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 96B4806F1E3ACDAC0062B88D /* white_1600x1200.jpg */; };
 		96E791EF1E20B060004E660E /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96E791EE1E20B060004E660E /* ResourcePath.mm */; };
 		96E791F51E20B060004E660E /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 96E791F41E20B060004E660E /* cute_image.jpg */; };
 		96E791F71E20B060004E660E /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 96E791F61E20B060004E660E /* nice_music.ogg */; };
@@ -26,6 +27,8 @@
 		96AEB21B1E273CD500365C79 /* main copy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main copy.cpp"; sourceTree = "<group>"; };
 		96AEB21D1E273E8400365C79 /* black_800x600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_800x600.png; sourceTree = "<group>"; };
 		96AEB21E1E273E8400365C79 /* white_800x600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_800x600.png; sourceTree = "<group>"; };
+		96B4806F1E3ACDAC0062B88D /* white_1600x1200.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_1600x1200.jpg; sourceTree = "<group>"; };
+		96B480741E3AD5180062B88D /* Constants_GoL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Constants_GoL.hpp; sourceTree = "<group>"; };
 		96E791E91E20B060004E660E /* Conway_GoL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conway_GoL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E791ED1E20B060004E660E /* Conway_GoL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Conway_GoL-Info.plist"; sourceTree = "<group>"; };
 		96E791EE1E20B060004E660E /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 				96F544751E2ACBEB00D093CE /* main.cpp */,
 				96F544771E2AD2A900D093CE /* Grid.cpp */,
 				96F544781E2AD2A900D093CE /* Grid.hpp */,
+				96B480741E3AD5180062B88D /* Constants_GoL.hpp */,
 				96F5447A1E2AD2F700D093CE /* Cell.cpp */,
 				96F5447B1E2AD2F700D093CE /* Cell.hpp */,
 				96F5447D1E2AD53B00D093CE /* Game.cpp */,
@@ -103,6 +107,7 @@
 		96E791F31E20B060004E660E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				96B4806F1E3ACDAC0062B88D /* white_1600x1200.jpg */,
 				96AEB21D1E273E8400365C79 /* black_800x600.png */,
 				96F544801E2B529500D093CE /* Arial.ttf */,
 				96AEB21E1E273E8400365C79 /* white_800x600.png */,
@@ -177,6 +182,7 @@
 				96E791F91E20B060004E660E /* sansation.ttf in Resources */,
 				96F544811E2B529500D093CE /* Arial.ttf in Resources */,
 				96AEB21F1E273E8400365C79 /* black_800x600.png in Resources */,
+				96B480701E3ACDAC0062B88D /* white_1600x1200.jpg in Resources */,
 				96E791F71E20B060004E660E /* nice_music.ogg in Resources */,
 				96AEB2201E273E8400365C79 /* white_800x600.png in Resources */,
 				96E791F51E20B060004E660E /* cute_image.jpg in Resources */,

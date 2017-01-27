@@ -14,12 +14,13 @@ Cell::Cell() {
 }
 
 
-Cell::Cell(int xPos, int yPos, bool isLiving) {
-    cellWidth = cellHeight = 20;
+Cell::Cell(int rowIndex, int colIndex, bool isLiving) {
     
-    cellShape = sf::RectangleShape(sf::Vector2f(cellWidth, cellHeight));
+    cellShape = sf::RectangleShape(sf::Vector2f(kCellSize, kCellSize));
     
-    cellShape.setPosition(yPos*cellWidth, xPos*cellHeight);
+    //cellShape.setPosition(165, 165);
+    cellShape.setPosition(colIndex * kCellSize + 160, rowIndex * kCellSize +160);
+
     isAlive = isLiving;
     
     if (isAlive == true) {

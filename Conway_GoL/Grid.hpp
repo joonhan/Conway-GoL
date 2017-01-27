@@ -11,11 +11,10 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Constants_GoL.hpp"
 #include "Cell.hpp"
-//#include "Game.hpp"
 
-
-//class Game;
+using namespace Constants_GoL;
 
 class Grid {
     
@@ -23,13 +22,23 @@ public:
     Grid();
     void setCellIsAlive(bool isAlive, int x, int y);
     bool getCellIsAlive(int x, int y);
+    void clearGrid(); 
     void drawGridLines(sf::RenderWindow& window);
     void drawCells(sf::RenderWindow& window);
+    void update(sf::RenderWindow& window); 
     
 private:
-    int gridWidth;
-    int gridHeight;
-    Cell cells[30][40];
+    //int gridWidth;
+    //int gridHeight;
+    
+    //the ACTUAL cell matrix is larger than the visible grid. So we can click
+    //outside the grid lines
+    
+    Cell currGenCells[kCellsPerRow][kCellsPerCol];
+    //Cell currGenCells[Constants_GoL::kCellsPerRow][Constants_GoL::kCellsPerRow];
+    Cell nextGenCells[kCellsPerRow][kCellsPerCol];
+    //Cell nextGenCells[Constants_GoL::kCellsPerRow][Constants_GoL::kCellsPerCol];
+    
     sf::Vertex line[2];
     
     /*sf::Vertex line[2] = {
