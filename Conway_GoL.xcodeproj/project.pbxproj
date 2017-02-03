@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9676976A1E3BF6F9000C0D9B /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967697681E3BF6F9000C0D9B /* Button.cpp */; };
+		9676976C1E3C88F6000C0D9B /* Menlo.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 9676976B1E3C88F6000C0D9B /* Menlo.ttc */; };
 		96AEB21C1E273CD500365C79 /* main copy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96AEB21B1E273CD500365C79 /* main copy.cpp */; };
 		96AEB21F1E273E8400365C79 /* black_800x600.png in Resources */ = {isa = PBXBuildFile; fileRef = 96AEB21D1E273E8400365C79 /* black_800x600.png */; };
 		96AEB2201E273E8400365C79 /* white_800x600.png in Resources */ = {isa = PBXBuildFile; fileRef = 96AEB21E1E273E8400365C79 /* white_800x600.png */; };
@@ -24,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		967697681E3BF6F9000C0D9B /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
+		967697691E3BF6F9000C0D9B /* Button.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Button.hpp; sourceTree = "<group>"; };
+		9676976B1E3C88F6000C0D9B /* Menlo.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Menlo.ttc; sourceTree = "<group>"; };
 		96AEB21B1E273CD500365C79 /* main copy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main copy.cpp"; sourceTree = "<group>"; };
 		96AEB21D1E273E8400365C79 /* black_800x600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_800x600.png; sourceTree = "<group>"; };
 		96AEB21E1E273E8400365C79 /* white_800x600.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_800x600.png; sourceTree = "<group>"; };
@@ -86,6 +91,8 @@
 				96F5447B1E2AD2F700D093CE /* Cell.hpp */,
 				96F5447D1E2AD53B00D093CE /* Game.cpp */,
 				96F5447E1E2AD53B00D093CE /* Game.hpp */,
+				967697681E3BF6F9000C0D9B /* Button.cpp */,
+				967697691E3BF6F9000C0D9B /* Button.hpp */,
 				96E791F01E20B060004E660E /* ResourcePath.hpp */,
 				96E791EE1E20B060004E660E /* ResourcePath.mm */,
 				96E791F11E20B060004E660E /* exmain.cpp */,
@@ -108,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				96B4806F1E3ACDAC0062B88D /* white_1600x1200.jpg */,
+				9676976B1E3C88F6000C0D9B /* Menlo.ttc */,
 				96AEB21D1E273E8400365C79 /* black_800x600.png */,
 				96F544801E2B529500D093CE /* Arial.ttf */,
 				96AEB21E1E273E8400365C79 /* white_800x600.png */,
@@ -185,6 +193,7 @@
 				96B480701E3ACDAC0062B88D /* white_1600x1200.jpg in Resources */,
 				96E791F71E20B060004E660E /* nice_music.ogg in Resources */,
 				96AEB2201E273E8400365C79 /* white_800x600.png in Resources */,
+				9676976C1E3C88F6000C0D9B /* Menlo.ttc in Resources */,
 				96E791F51E20B060004E660E /* cute_image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +224,7 @@
 				96E791EF1E20B060004E660E /* ResourcePath.mm in Sources */,
 				96F544761E2ACBEB00D093CE /* main.cpp in Sources */,
 				96AEB21C1E273CD500365C79 /* main copy.cpp in Sources */,
+				9676976A1E3BF6F9000C0D9B /* Button.cpp in Sources */,
 				96F5447F1E2AD53B00D093CE /* Game.cpp in Sources */,
 				96F544791E2AD2A900D093CE /* Grid.cpp in Sources */,
 				96F5447C1E2AD2F700D093CE /* Cell.cpp in Sources */,

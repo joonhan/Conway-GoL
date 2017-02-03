@@ -45,14 +45,14 @@ void Grid::setCellIsAlive(bool isAlive, int x, int y) {
     //if the x position of my cursor is at 160, I want that to be the 0th col index
     //also need to make sure that the cell is being positioned with 160 offset (in Cell.hpp)
     
-    std::cout << "setting cell" << std::endl;
-    //int row = y / kCellSize;
+    //std::cout << "setting cell" << std::endl;
+    int row = y / kCellSize;
     //int row = y / kTopMargin;
-    int row = (y - 160) / 40;
+    //int row = (y - 160) / 40;
     
-    //int col = x / kCellSize;
+    int col = x / kCellSize;
     //int col = x / kLeftMargin;
-    int col = (x - 160) / 40;
+    //int col = (x - 160) / 40;
     
     currGenCells[row][col].setIsAlive(isAlive);
     nextGenCells[row][col].setIsAlive(isAlive); //this allows you to pause game, remove cells and keep them hidden
@@ -60,12 +60,12 @@ void Grid::setCellIsAlive(bool isAlive, int x, int y) {
 
 bool Grid::getCellIsAlive(int x, int y) {
     
-    //int row = y / kCellSize;
-    int row = (y - 160) / 40;
+    int row = y / kCellSize;
+    //int row = (y - 160) / 40;
     
-    //int col = x / kCellSize;
+    int col = x / kCellSize;
     //int col = x / kLeftMargin*2;
-    int col = (x - 160) / 40;
+    //int col = (x - 160) / 40;
     
     
     return currGenCells[row][col].getIsAlive();
@@ -121,13 +121,26 @@ void Grid::drawCells(sf::RenderWindow& window){
     //line[0].color = sf::Color::Black;
     //line[1].color = sf::Color::Black;
     
-    //draw cells
-    for (int row = 0; row < kCellsPerRow; row++){
-        for (int col = 0; col < kCellsPerCol; col++){
+    //draw cells within the grid boundary
+    for (int row = kFirstCellRowIndex; row < kCellsPerRow - kFirstCellRowIndex; row++){
+        for (int col = kFirstCellColIndex; col < kCellsPerCol - kFirstCellColIndex; col++) {
             //currGenCells[row][col].draw(window);
             window.draw(currGenCells[row][col].getCellShape());
         }
     }
+    
+    
+    
+    
+    
+    //working
+    /*
+    for (int row = 4; row < kCellsPerRow-4; row++){
+        for (int col = 4; col < kCellsPerCol-4; col++){
+            //currGenCells[row][col].draw(window);
+            window.draw(currGenCells[row][col].getCellShape());
+        }
+    }*/
     /*sf::VertexArray lines(sf::LinesStrip, 4);
     
     lines[0].position = sf::Vector2f(10, 10);
@@ -162,6 +175,9 @@ void Grid::update(sf::RenderWindow &window) {
             //if cell is alive
             if (currGenCells[row][col].getIsAlive() == true) {
                //check neighbors
+                
+                //set boundaries... if row > 0 then do row-1
+                
                 if (currGenCells[row-1][col-1].getIsAlive() == true) {
                     neighborsAlive++;
                 }
@@ -232,8 +248,17 @@ void Grid::update(sf::RenderWindow &window) {
     for (int row = 0; row < kCellsPerRow; row++){
         for (int col = 0; col < kCellsPerCol; col++){
             //currGenCells[row][col].draw(window);
+            
+            //copy new generation cells to current generation
             currGenCells[row][col] = nextGenCells[row][col];
-            window.draw(nextGenCells[row][col].getCellShape());
+            
+           /* //draw cells only if its within the grid boundaries
+            if (row >= kFirstCellRowIndex && row < (kCellsPerRow - kFirstCellRowIndex) &&
+                col >= kFirstCellColIndex && col < (kCellsPerCol - kFirstCellColIndex)) {
+                window.draw(nextGenCells[row][col].getCellShape());
+            }*/
         }
     }
-}//update
+    
+    
+}//update()

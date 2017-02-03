@@ -18,8 +18,7 @@ Cell::Cell(int rowIndex, int colIndex, bool isLiving) {
     
     cellShape = sf::RectangleShape(sf::Vector2f(kCellSize, kCellSize));
     
-    //cellShape.setPosition(165, 165);
-    cellShape.setPosition(colIndex * kCellSize + 160, rowIndex * kCellSize +160);
+    cellShape.setPosition(colIndex * kCellSize, rowIndex * kCellSize);
 
     isAlive = isLiving;
     

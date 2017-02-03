@@ -12,7 +12,6 @@
 #include "Game.hpp"
 
 
-
 int main() {
     
     try {
@@ -21,29 +20,9 @@ int main() {
     }
     
     catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
     
-    /*
-    sf::RenderWindow window;
-    window.create(sf::VideoMode(1920,1080), "Game of Life");
+    return 0;
     
-    while(window.isOpen()){
-        sf::Event windowOpen;
-        while(window.pollEvent(windowOpen)){
-            switch(windowOpen.type){
-            
-                case(windowOpen.Closed):
-                    window.close();
-                    break;
-                    
-                default:
-                    break;
-                    
-            }
-        }
-    
-    
-    
-    }*/
 } //end main()

@@ -10,10 +10,14 @@
 #define Game_hpp
 
 #include <iostream>
+#include <string>
 #include <SFML/Graphics.hpp>
+#include "Constants_GoL.hpp"
 #include "Grid.hpp"
 #include "Cell.hpp"
-#include "Constants_GoL.hpp"
+#include "Button.hpp"
+
+class Button; 
 
 //class Grid;
 using namespace Constants_GoL; 
@@ -24,16 +28,17 @@ public:
     Game();
     //void setup();
     void run();
-    //void draw();
-    //void drawBlinker(int x, int y);
-    //void drawBeacon(int x, int y);
-    //void drawGlider(int x, int y);
+    //void drawButtons();
+    void drawBlinker();
+    void drawGlider();
+    void drawGoblinGun(); 
 
 private:
     sf::RenderWindow window;
     sf::Event event;
     Grid grid;
     bool isGameRunning;
+    //Button& button;
     //sf::Texture background;
 };
 
