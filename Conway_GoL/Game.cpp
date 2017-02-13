@@ -1,66 +1,57 @@
-//
 //  Game.cpp
 //  Conway_GoL
-//
-//  Created by Joonsoo Han on 1/14/17.
-//  Copyright © 2017 Joonsoo Han. All rights reserved.
-//
+
 
 #include "Game.hpp"
-#include "ResourcePath.hpp"
 
 using namespace Constants_GoL;
 
-//Game::Game() : window(sf::VideoMode(kScreenWidth, kScreenHeight), "Game of Life")
 
+//Game class default constructor
 Game::Game() {
-    
+    //assign window settings
     window.create(sf::VideoMode(kWindowWidth, kWindowHeight), "Game of Life");
     
+    //initialize game status flag
     isGameRunning = false;
     
 }
 
-/*void Game::setup() {
-
-    if (!(background.loadFromFile(resourcePath() + "white_800x600.png"))) {
-        std::cout << "Error: could not load image" << std::endl;
-        return EXIT_FAILURE;
-    }
-}*/
-/*void Game::drawGrid() {
-    grid.drawGrid(window);
-    grid.draw(window);
-    grid.drawGrid(window);
-}*/
-
-//we could draw the blinker at a specified location using mouse cursor
-//void drawBlinker(int xPosition, int yPosition) {
-
-void Game::drawBlinker() {
-    //this scales the cells according to the cellSize
-    grid.setCellIsAlive(true, kCellsPerCol/2*kCellSize, kCellsPerRow/2*kCellSize);
-    grid.setCellIsAlive(true, kCellsPerCol/2*kCellSize, kCellsPerRow/2*kCellSize + kCellSize);
-    grid.setCellIsAlive(true, kCellsPerCol/2*kCellSize, kCellsPerRow/2*kCellSize + 2*kCellSize);
-    
+//simplify button draw methods
+void Game::drawButton(Button &btn) {
+    window.draw(btn.getShape());
+    window.draw(btn.getText()); 
 }
 
+
+//draw the blinker shape
+void Game::drawBlinker() {
+    
+    //scale the drawing of shape according to the cellSize and draw at center of window
+    grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize, kCellsPerRow/2 * kCellSize);
+    grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize, kCellsPerRow/2 * kCellSize + kCellSize);
+    grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize, kCellsPerRow/2 * kCellSize + 2*kCellSize);
+
+}
+
+//draw the glider shape
 void Game::drawGlider() {
     
     grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize, kCellsPerRow/2 * kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize + kCellSize, kCellsPerRow/2*kCellSize + kCellSize);
-    grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize-kCellSize, kCellsPerRow/2*kCellSize + 2*kCellSize);
+    grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize-kCellSize, kCellsPerRow/2 *kCellSize + 2*kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize, kCellsPerRow/2 * kCellSize + 2*kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/2 * kCellSize + kCellSize, kCellsPerRow/2 * kCellSize + 2*kCellSize);
-    }
+}
 
+//draw the gun shape from left to right
 void Game::drawGoblinGun() {
+    
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize, kCellsPerRow/2 * kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + kCellSize, kCellsPerRow/2 * kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize, kCellsPerRow/2*kCellSize + kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + kCellSize, kCellsPerRow/2*kCellSize + kCellSize);
     
-    //left to right - second object
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 10*kCellSize, kCellsPerRow/2 * kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 10*kCellSize, kCellsPerRow/2 * kCellSize + kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 10*kCellSize, kCellsPerRow/2 * kCellSize + 2*kCellSize);
@@ -99,29 +90,39 @@ void Game::drawGoblinGun() {
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 24*kCellSize, kCellsPerRow/2 * kCellSize + 1*kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 24*kCellSize, kCellsPerRow/2 * kCellSize + 2*kCellSize);
     
-    
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 34*kCellSize, kCellsPerRow/2*kCellSize - 2*kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 35*kCellSize, kCellsPerRow/2*kCellSize - 2*kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 34*kCellSize, kCellsPerRow/2*kCellSize - kCellSize);
     grid.setCellIsAlive(true, kCellsPerCol/4 * kCellSize + 35*kCellSize, kCellsPerRow/2*kCellSize - kCellSize);
 }
 
-
-
-
+//runs the main game loop
 void Game::run() {
     
+    //set background texture
     sf::Texture background;
     if (!(background.loadFromFile(resourcePath() + "white_1600x1200.jpg"))) {
         std::cout << "Error: could not load image" << std::endl;
         return EXIT_FAILURE;
     }
     
-    sf::Sprite start_menu(background);
+    //set font
+    sf::Font font;
+    if (!(font.loadFromFile(resourcePath() + "Arial.ttf"))) {
+        std::cout << "Error: could not load text file" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    //assign texture to sprite, which will be drawn
+    sf::Sprite gameBackground(background);
+    
+    //limit fps
     window.setFramerateLimit(30);
     
-    
+    //create gray color
     sf::Color gray(210, 210, 210);
+    
+    //create buttons with text, color, and x and y positions
     Button blinkerButton ("Blinker", gray, 160, 1060);
     Button gliderButton ("Glider", gray, 330, 1060);
     Button goblinGunButton ("GoblinGun", gray, 480, 1060);
@@ -130,245 +131,153 @@ void Game::run() {
     Button stopButton("STOP", gray, 1260, 1060);
     Button speedUpButton("SPEED +", gray, 700, 1060);
     Button speedDownButton("SPEED -", gray, 850, 1060);
-    //"Clear", sf::Color::Black, 10, 700);
     
-
-    sf::Font font;
-    if (!(font.loadFromFile(resourcePath() + "Arial.ttf"))) {
-        std::cout << "Error: could not load text file" << std::endl;
-            return EXIT_FAILURE;
-    }
-    
-    
+    //set cell generation counter
     int genNum = 0;
+    
+    //set text that shows the cell generation counter
     sf::Text genCounter("generation: " + std::to_string(genNum), font, 40);
-    //genCounter.setFont(font);
-    //genCounter.setString();
-    //genCounter.setCharacterSize(100);
     genCounter.setFillColor(sf::Color::Black);
     genCounter.setPosition(5, 0);
   
-    
-    /*
-    sf::Text text("Welcome to the Game of Life", font, 50);
-    sf::Text textClear;
-    textClear.setFont(font);
-    textClear.setString("Clear");
-    textClear.setCharacterSize(100);
-    textClear.setFillColor(sf::Color::Black);
-    
-    //retrieve the dimensions of the text box
-    sf::FloatRect textRect = textClear.getLocalBounds();
-    //set the origin of the text box (aka its center of gravity)
-    text.setOrigin(textRect.width/2, 0);
-    //using the origin, set it on the screen
-    text.setPosition(1600/2.0f, 0);
-    
-    sf::RectangleShape button;
-    button.setFillColor(sf::Color::White);
-    button.setOutlineColor(sf::Color::Black);
-    button.setOutlineThickness(2);
-    button.setSize(sf::Vector2f(100, 100));
-    button.setPosition(10, 600);
-    */
-    
-    
-    
-/*    sf::Vertex line[] = {
-        sf::Vertex(sf::Vector2f(10,10), sf::Color::Red),
-        sf::Vertex(sf::Vector2f(150,150), sf::Color::Red)
-    };
- 
- 
- */
-    time_t start;
-    time_t end;
-    bool resetTimer = true;
+    //start the clock
     sf::Clock clock;
-    sf::Time t1 = sf::milliseconds(1000);
-    int count = 0;
     
-    sf::Text delayCounter("delay: " + std::to_string(t1.asMilliseconds()) + "ms", font, 40);
+    //set delay between frames
+    sf::Time frameDelay = sf::milliseconds(500);
+
+    //set text that shows the frame delay
+    sf::Text delayCounter("delay: " + std::to_string(frameDelay.asMilliseconds()) + "ms", font, 40);
     delayCounter.setFillColor(sf::Color::Black);
     delayCounter.setPosition(5, 40);
     
+    
+    //main game loop
     while (window.isOpen()) {
+        //event handler
         while (window.pollEvent(event)) {
-            //switch(event.type) {
-                //case(sf::Event::Closed):
+
+            //when window close button is pressed, close it
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            //sf::Vector2i position = sf::Mouse::getPosition(window);
-            
+            //when left mouse button is pressed
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                
+                //get the position of the mouse within the window
                 sf::Vector2i position = sf::Mouse::getPosition(window);
-                /*
-                if (position.x > startButton.getLeftBound() && position.x < startButton.getRightBound() && position.y > startButton.getTopBound() && position.y < startButton.getBottomBound() && isGameRunning == true) {
+               
+                //if mouse position is hovering over startButton
+                if (position.x > startButton.getBound(Button::left) && position.x < startButton.getBound(Button::right) && position.y > startButton.getBound(Button::top) && position.y < startButton.getBound(Button::bottom)) {
                     
-                    isGameRunning = false;
-                    count++;
-                    std::cout << "count is " << count << std::endl;
-                }*/
-                
-                
-                if (position.x > startButton.getLeftBound() && position.x < startButton.getRightBound() && position.y > startButton.getTopBound() && position.y < startButton.getBottomBound()) {
-                    std::cout << " start button pressed " << std::endl;
-                    
+                    //if game is running, mouse click pauses it; else restarts it
                     if (isGameRunning == true) {
                         isGameRunning = false;
                     } else {
                         isGameRunning = true;
                     }
-                    count++;
-                    std::cout << "count is " << count << std::endl;
-
-                    //isGameRunning = !isGameRunning;
                 }
                 
-                
                 if (!isGameRunning) {
-                    std::cout << "mouse button pressed" << std::endl;
-                    //sf::Vector2i position = sf::Mouse::getPosition(window);
-              
-                //check that mouse press is within grid boundaries
-               /*if (position.x > kLeftMargin && position.x < kRightMargin &&
-                    position.y > kTopMargin && position.y < kBottomMargin) {
-                */
+                    //if left mouse is pressed, set switch cell status
                     if (grid.getCellIsAlive(position.x, position.y) == false) {
                         grid.setCellIsAlive(true, position.x, position.y);
                     } else {
                         grid.setCellIsAlive(false, position.x, position.y);
+
                     }
-                    //std::cout << position.x << std::endl;
-                    //std::cout << position.y << std::endl;
-                //}
-                    if (position.x > 1100 && position.x < 1200 && position.y > 1060 && position.y < 1100) {
-                    std::cout << "hit clear box!" << std::endl;
-                    grid.clearGrid();
+                    
+                    //if mouse is over clearButton
+                    if (position.x > clearButton.getBound(Button::left) && position.x < clearButton.getBound(Button::right) && position.y > clearButton.getBound(Button::top) && position.y < clearButton.getBound(Button::bottom)) {
+                        
+                        //clear grid and reset generation counter
+                        grid.clearGrid();
                         genNum = 0;
                         genCounter.setString("generation: " + std::to_string(genNum));
-                        //window.draw(genCounter);
                     }
                 }
-                
-                if (position.x > blinkerButton.getLeftBound() && position.x < blinkerButton.getRightBound() && position.y > blinkerButton.getTopBound() && position.y < blinkerButton.getBottomBound()) {
+                //if mouse is over blinkerButton
+                if (position.x > blinkerButton.getBound(Button::left) && position.x < blinkerButton.getBound(Button::right) && position.y > blinkerButton.getBound(Button::top) && position.y < blinkerButton.getBound(Button::bottom)) {
+                    
                     grid.clearGrid();
                     genNum = 0;
                     drawBlinker();
                 }
-                if (position.x > gliderButton.getLeftBound() && position.x < gliderButton.getRightBound() && position.y > gliderButton.getTopBound() && position.y < gliderButton.getBottomBound()) {
+                //if mouse is over gliderButton
+                if (position.x > gliderButton.getBound(Button::left) && position.x < gliderButton.getBound(Button::right) && position.y > gliderButton.getBound(Button::top) && position.y < gliderButton.getBound(Button::bottom)) {
+                    
                     grid.clearGrid();
                     genNum = 0;
                     drawGlider();
                 }
-                if (position.x > goblinGunButton.getLeftBound() && position.x < goblinGunButton.getRightBound() && position.y > goblinGunButton.getTopBound() && position.y < goblinGunButton.getBottomBound()) {
+                //if mouse is over goblinGunButton
+                if (position.x > goblinGunButton.getBound(Button::left) && position.x < goblinGunButton.getBound(Button::right) && position.y > goblinGunButton.getBound(Button::top) && position.y < goblinGunButton.getBound(Button::bottom)) {
                     
                     grid.clearGrid();
                     genNum = 0;
                     drawGoblinGun();
                 }
-                if (position.x > speedUpButton.getLeftBound() && position.x < speedUpButton.getRightBound() && position.y > speedUpButton.getTopBound() && position.y < speedUpButton.getBottomBound()) {
+                //if mouse is over speedUpButton
+                if (position.x > speedUpButton.getBound(Button::left) && position.x < speedUpButton.getBound(Button::right) && position.y > speedUpButton.getBound(Button::top) && position.y < speedUpButton.getBound(Button::bottom)) {
                     
-                    if (t1.asMilliseconds() > 0) {
-                        t1 -= sf::milliseconds(50);
+                    //with every press of speedUpButton, decrement delay by 50ms but keep delay >= 0
+                    if (frameDelay.asMilliseconds() > 0) {
+                        frameDelay -= sf::milliseconds(50);
                     }
-                    delayCounter.setString("delay: " + std::to_string(t1.asMilliseconds())+"ms");
+                    delayCounter.setString("delay: " + std::to_string(frameDelay.asMilliseconds())+"ms");
                 }
-                if (position.x > speedDownButton.getLeftBound() && position.x < speedDownButton.getRightBound() && position.y > speedDownButton.getTopBound() && position.y < speedDownButton.getBottomBound()) {
+                //if mouse is over speedDownButton
+                if (position.x > speedDownButton.getBound(Button::left) && position.x < speedDownButton.getBound(Button::right) && position.y > speedDownButton.getBound(Button::top) && position.y < speedDownButton.getBound(Button::bottom)) {
                     
-                    if (t1.asMilliseconds() < 1000) {
-                        t1 += sf::milliseconds(50);
+                    //increment delay with each press but keep frameDelay <= 1000
+                    if (frameDelay.asMilliseconds() < 1000) {
+                        frameDelay += sf::milliseconds(50);
                     }
-                    delayCounter.setString("delay: " + std::to_string(t1.asMilliseconds())+"ms");
+                    delayCounter.setString("delay: " + std::to_string(frameDelay.asMilliseconds())+"ms");
                 }
                 
-            } //mouse pressed
+            } //end mouse pressed
     
+            //if spacebar is pressed, pause the game
             if (event.type == sf::Event::KeyPressed){
                 if (event.key.code == sf::Keyboard::Space) {
-                    std::cout << "space pressed" << std::endl;
                     isGameRunning = !isGameRunning;
                 }
             }
             
         }
+        //begin drawing in the loop
         window.clear();
-        window.draw(start_menu);
-        grid.drawGridLines(window);
+        window.draw(gameBackground);
         grid.drawCells(window);
-        
-        
-        //sf::Clock clock;
-        //sf::Time elapsed = clock.getElapsedTime();
-        sf::Time elapsed = clock.getElapsedTime();
-        std::cout << elapsed.asMilliseconds() << std::endl;
-        //clock.restart();
-        
-        /*
-        if (resetTimer == true){
-            time(&start);
-            resetTimer = false;
-        }*/
         grid.drawGridLines(window);
-        
+
+        //get elapsed time with each loop
+        sf::Time elapsed = clock.getElapsedTime();
         
         if (isGameRunning == true) {
-            //grid.drawCells(window);
-            //grid.drawGridLines(window);
-        
-            //sf::Time t1 = sf::milliseconds(5);
-            //sf::sleep(t1);
             
-            //time(&end);
-            std::cout << "start is " << start << std::endl;
-            std::cout << "end is " << end << std::endl;
-
-            
-            //std::cout << "time is " << end - start << std::endl;
-            
-            if (elapsed.asMilliseconds() > t1.asMilliseconds()) {
+            //only update cells if the time elapsed goes over frameDelay
+            if (elapsed.asMilliseconds() > frameDelay.asMilliseconds()) {
                 grid.update(window);
-                grid.drawGridLines(window);
-                //resetTimer = true;
+
                 clock.restart();
                 genNum++;
                 genCounter.setString("generation: " + std::to_string(genNum));
-                //delayCounter.setString("delay: " + std::to_string(t1.asMilliseconds())+"ms");
-
-
             }
-            //grid.drawCells(window);
-            //grid.drawGridLines(window);
-            //}
-            //window.draw(line, 2, sf::Lines);
-        }
-        
-        //draw buttons
-        
-        window.draw(blinkerButton.getShape());
-        window.draw(blinkerButton.getText());
-        window.draw(gliderButton.getShape());
-        window.draw(gliderButton.getText());
-        
-        window.draw(goblinGunButton.getShape());
-        window.draw(goblinGunButton.getText());
-        if(!isGameRunning) {
-        window.draw(clearButton.getShape());
-        window.draw(clearButton.getText());
-        }
-        if(!isGameRunning) {
-        window.draw(startButton.getShape());
-        window.draw(startButton.getText());
-        } else {
-        window.draw(stopButton.getShape());
-        window.draw(stopButton.getText());
-        window.draw(speedUpButton.getShape());
-        window.draw(speedUpButton.getText());
-        window.draw(speedDownButton.getShape());
-        window.draw(speedDownButton.getText());
-        }
+            drawButton(stopButton);
+            drawButton(speedUpButton);
+            drawButton(speedDownButton);
 
+        } else {
+            drawButton(startButton);
+            drawButton(clearButton);
+        }
+        
+        drawButton(blinkerButton);
+        drawButton(gliderButton);
+        drawButton(goblinGunButton);
+        
         window.draw(genCounter);
         window.draw(delayCounter);
         window.display();

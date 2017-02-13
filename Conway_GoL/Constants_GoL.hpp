@@ -1,17 +1,13 @@
-//
 //  Constants_GoL.hpp
 //  Conway_GoL
-//
-//  Created by Joonsoo Han on 1/26/17.
-//  Copyright © 2017 Joonsoo Han. All rights reserved.
-//
+//  Collection of constants used across classes
 
 #ifndef Constants_GoL_hpp
 #define Constants_GoL_hpp
 
 namespace Constants_GoL {
     
-    //size of window
+    //size of program window
     const int kWindowWidth = 1600;
     const int kWindowHeight = 1200;
     
@@ -23,19 +19,19 @@ namespace Constants_GoL {
     const int kCellSize = 20;
 
     //number of cells in the columns and rows
-    //using kWindow instead of kGrid means actual cell matrix is > visible grid
+    //by using 'kWindow', actual cell matrix will be > visible grid
     const int kCellsPerCol = kWindowWidth / kCellSize;
     const int kCellsPerRow = kWindowHeight / kCellSize;
     
     //margin space between window and grid boundaries
-    const int kLeftMargin = (kWindowWidth - kGridWidth) / 2;
-    const int kRightMargin = kWindowWidth - kLeftMargin;
-    const int kTopMargin = (kWindowHeight - kGridHeight) / 2;
-    const int kBottomMargin = kWindowHeight - kTopMargin;
+    const int kGridLeftBound = (kWindowWidth - kGridWidth) / 2;
+    const int kGridRightBound = kWindowWidth - kGridLeftBound;
+    const int kGridTopBound = (kWindowHeight - kGridHeight) / 2;
+    const int kGridBottomBound = kWindowHeight - kGridTopBound;
     
-    //index of first cell; used to refer to the first visible cell in the matrix
-    const int kFirstCellColIndex = kLeftMargin / kCellSize;
-    const int kFirstCellRowIndex = kTopMargin / kCellSize;
+    //index of first cell; used to refer to the first visible cell in the grid
+    const int kFirstCellColIndex = kGridLeftBound / kCellSize;
+    const int kFirstCellRowIndex = kGridTopBound / kCellSize;
 }
 
 

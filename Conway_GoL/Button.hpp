@@ -1,10 +1,5 @@
-//
 //  Button.hpp
 //  Conway_GoL
-//
-//  Created by Joonsoo Han on 1/27/17.
-//  Copyright © 2017 Joonsoo Han. All rights reserved.
-//
 
 #ifndef Button_hpp
 #define Button_hpp
@@ -17,15 +12,13 @@
 class Button {
     
 public:
+    enum Bound {left, right, top, bottom};
+    
     Button();
     Button(std::string text, sf::Color color, int xPosition, int yPosition);
-    
     sf::Text& getText() { return buttonText; };
     sf::RectangleShape& getShape() { return buttonBox; };
-    int getLeftBound();
-    int getRightBound();
-    int getTopBound();
-    int getBottomBound(); 
+    int getBound(Bound position);
     
 private:
     sf::Font buttonFont;
@@ -35,4 +28,4 @@ private:
 };
 
 
-#endif /* Button_hpp */
+#endif

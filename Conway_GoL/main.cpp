@@ -1,10 +1,5 @@
-//
 //  main.cpp
 //  Conway_GoL
-//
-//  Created by Joonsoo Han on 1/14/17.
-//  Copyright © 2017 Joonsoo Han. All rights reserved.
-//
 
 #include <iostream>
 #include <exception>
@@ -25,4 +20,4 @@ int main() {
     
     return 0;
     
-} //end main()
+}
