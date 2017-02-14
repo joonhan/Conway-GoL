@@ -151,8 +151,6 @@ void Game::run() {
     delayCounter.setFillColor(sf::Color::Black);
     delayCounter.setPosition(5, 40);
     
-    int count = 0;
-    int countBottom = 0;
     //main game loop
     while (window.isOpen()) {
         //event handler
@@ -181,8 +179,6 @@ void Game::run() {
                 }
                 
                 if (!isGameRunning) {
-                    count++;
-                    std::cout << "key pressed " << count << std::endl;
                     //if left mouse is pressed, set switch cell status
                     if (grid.getCellIsAlive(position.x, position.y) == false) {
                         grid.setCellIsAlive(true, position.x, position.y);
@@ -285,8 +281,6 @@ void Game::run() {
         drawButton(gliderButton);
         drawButton(goblinGunButton);
         
-        countBottom++;
-        std::cout << countBottom << std::endl;
         window.draw(genCounter);
         window.draw(delayCounter);
         window.display();
