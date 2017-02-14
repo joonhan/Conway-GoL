@@ -106,25 +106,28 @@ void Grid::update(sf::RenderWindow &window) {
             //counter to keep track # neighbors that are alive; resets per loop
             int neighborsAlive = 0;
 
-            //set boundaries... if row > 0 then do row-1
-            //if(row > 0 && col > 0) {
-            
-            if (currGenCells[row-1][col-1].getIsAlive() == true) {
-                neighborsAlive++;
+            if (row > 0 && col > 0) {
+                if (currGenCells[row-1][col-1].getIsAlive() == true) {
+                    neighborsAlive++;
+                }
             }
-            if (currGenCells[row-1][col].getIsAlive() == true) {
-                neighborsAlive++;
+            if (row > 0) {
+                if (currGenCells[row-1][col].getIsAlive() == true) {
+                    neighborsAlive++;
+                }
+                if (currGenCells[row-1][col+1].getIsAlive() == true) {
+                    neighborsAlive++;
+                }
             }
-            if (currGenCells[row-1][col+1].getIsAlive() == true) {
-                neighborsAlive++;
-            }
-            if (currGenCells[row][col-1].getIsAlive() == true) {
-                neighborsAlive++;
+            if (col > 0) {
+                if (currGenCells[row][col-1].getIsAlive() == true) {
+                    neighborsAlive++;
+                }
+                if (currGenCells[row+1][col-1].getIsAlive() == true) {
+                        neighborsAlive++;
+                }
             }
             if (currGenCells[row][col+1].getIsAlive() == true) {
-                neighborsAlive++;
-            }
-            if (currGenCells[row+1][col-1].getIsAlive() == true) {
                 neighborsAlive++;
             }
             if (currGenCells[row+1][col].getIsAlive() == true) {

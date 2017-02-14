@@ -151,7 +151,8 @@ void Game::run() {
     delayCounter.setFillColor(sf::Color::Black);
     delayCounter.setPosition(5, 40);
     
-    
+    int count = 0;
+    int countBottom = 0;
     //main game loop
     while (window.isOpen()) {
         //event handler
@@ -161,8 +162,9 @@ void Game::run() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            //when left mouse button is pressed
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            //check when left mouse button is released (instead of 'pressed' which will sometimes detect
+            //multiple clicks in each loop iteration)
+            if (event.type == sf::Event::MouseButtonReleased) {
                 
                 //get the position of the mouse within the window
                 sf::Vector2i position = sf::Mouse::getPosition(window);
@@ -179,12 +181,15 @@ void Game::run() {
                 }
                 
                 if (!isGameRunning) {
+                    count++;
+                    std::cout << "key pressed " << count << std::endl;
                     //if left mouse is pressed, set switch cell status
                     if (grid.getCellIsAlive(position.x, position.y) == false) {
                         grid.setCellIsAlive(true, position.x, position.y);
-                    } else {
+                    }
+                    
+                    else {
                         grid.setCellIsAlive(false, position.x, position.y);
-
                     }
                     
                     //if mouse is over clearButton
@@ -274,10 +279,14 @@ void Game::run() {
             drawButton(clearButton);
         }
         
+        grid.drawCells(window);
+        grid.drawGridLines(window);
         drawButton(blinkerButton);
         drawButton(gliderButton);
         drawButton(goblinGunButton);
         
+        countBottom++;
+        std::cout << countBottom << std::endl;
         window.draw(genCounter);
         window.draw(delayCounter);
         window.display();
